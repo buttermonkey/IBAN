@@ -18,7 +18,21 @@ public class IbanValidationService {
 		return iban.substring(4);
 	}
 
+	public String getCountryCodeNumber() {
+		int countryCodeNumber = letterToPlaceValue(iban.charAt(0)) * 10000 + letterToPlaceValue(iban.charAt(1)) * 100;
+		return Integer.toString(countryCodeNumber);
+	}
+
+	public String getFullCode() {
+		return getAccountNumber() + getCountryCodeNumber();
+	}
+
 	private static int digitToPlaceValue(char digit) {
 		return digit - '0';
 	}
+
+	private static int letterToPlaceValue(char letter) {
+		return Character.toUpperCase(letter) - 'A' + 10;
+	}
+
 }
