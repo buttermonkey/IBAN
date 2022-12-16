@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class IbanTest {
 	public static void main(String[] args) {
 		String iban = "AT611904300234573201";
@@ -8,5 +10,6 @@ public class IbanTest {
 		System.out.println("Pruefsumme: " + validator.getCheckSum());
 		System.out.println("Kontonummer: " + validator.getAccountNumber());
 		System.out.println("Pruefzahl: " + validator.getFullCode());
+		System.out.println("arr = " + Arrays.toString(validator.buildArray()));
 	}
 }

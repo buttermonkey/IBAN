@@ -27,6 +27,15 @@ public class IbanValidationService {
 		return getAccountNumber() + getCountryCodeNumber();
 	}
 
+	public int[] buildArray() {
+		String fullCode = getFullCode();
+		int[] result = new int[fullCode.length()];
+		for (int i = 0; i < fullCode.length(); i++) {
+			result[i] = digitToPlaceValue(fullCode.charAt(i));
+		}
+		return result;
+	}
+
 	private static int digitToPlaceValue(char digit) {
 		return digit - '0';
 	}
