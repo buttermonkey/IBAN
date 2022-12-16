@@ -1,4 +1,5 @@
 public class IbanValidationService {
+	public static final int CHECKSUM_MODULO = 97;
 	private final String iban;
 	private int calculatedChecksum = -1;
 
@@ -34,6 +35,22 @@ public class IbanValidationService {
 			result[i] = digitToPlaceValue(fullCode.charAt(i));
 		}
 		return result;
+	}
+
+	public int calcCheckSum() {
+		int[] code = buildArray();
+		int curMod = 0;
+		for (int digit : code) {
+			curMod = ((curMod * 10) + digit) % CHECKSUM_MODULO;
+		}
+		calculatedChecksum = 98 - curMod;
+		return calculatedChecksum;
+	}
+
+	public boolean isIbanCorrect() {
+		if (calculatedChecksum == -1)
+			calcCheckSum();
+		return calculatedChecksum == getCheckSum();
 	}
 
 	private static int digitToPlaceValue(char digit) {
